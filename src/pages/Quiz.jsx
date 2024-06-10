@@ -61,19 +61,16 @@ const QuizPage = () => {
     setSelectedOptions((prevSelectedOptions) => {
       const currentSelections = prevSelectedOptions[questionId] || [];
       if (currentSelections.includes(optionId)) {
-        // Deselect the option
         return {
           ...prevSelectedOptions,
           [questionId]: currentSelections.filter(id => id !== optionId)
         };
       } else if (currentSelections.length < 2) {
-        // Select the option
         return {
           ...prevSelectedOptions,
           [questionId]: [...currentSelections, optionId]
         };
       }
-      // Do nothing if already 2 options selected
       return prevSelectedOptions;
     });
   };
