@@ -7,3 +7,7 @@
   --auth-form-brand-accent: theme(colors.primary.600);
   --auth-form-submit-button-text-color: theme(colors.white);
 }
+
+.bg-blue-200 {
+  background-color: #bfdbfe; /* This is the default color for blue-200 in Tailwind CSS */
+}

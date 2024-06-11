@@ -60,24 +60,32 @@ const QuizPage = () => {
   const handleOptionSelect = (questionId, optionId) => {
     setSelectedOptions((prevSelectedOptions) => {
       const currentSelections = prevSelectedOptions[questionId] || [];
-      if (currentSelections.includes(optionId)) {
+      const isAlreadySelected = currentSelections.includes(optionId);
+  
+      if (isAlreadySelected) {
+        // If the option is already selected, clicking it again will remove it from the selections
         return {
           ...prevSelectedOptions,
           [questionId]: currentSelections.filter(id => id !== optionId)
         };
-      } else if (currentSelections.length < 2) {
-        return {
-          ...prevSelectedOptions,
-          [questionId]: [...currentSelections, optionId]
-        };
+      } else {
+        // Add the option to the selections only if there are less than 2 options already selected
+        if (currentSelections.length < 2) {
+          return {
+            ...prevSelectedOptions,
+            [questionId]: [...currentSelections, optionId]
+          };
+        }
       }
+      // If already 2 options are selected and the current one isn't one of them, just return the previous state
       return prevSelectedOptions;
     });
   };
+  
 
   const handleSubmitQuiz = () => {
+    console.log('Submitting quiz with selections:', selectedOptions);
     setSubmitted(true);
-    console.log('Quiz submitted with selections:', selectedOptions);
   };
 
   return (
@@ -87,15 +95,19 @@ const QuizPage = () => {
         <div key={quiz.id} className='mb-6'>
           <h2 className='text-xl mb-2'>{quiz.question}</h2>
           <div className='grid grid-cols-1 gap-4'>
-            {quiz.options.map((option) => (
-              <div
-                key={option.id}
-                className={`bg-gray-100 p-4 rounded-lg cursor-pointer ${selectedOptions[quiz.id]?.includes(option.id) ? 'bg-blue-200' : ''}`}
-                onClick={() => handleOptionSelect(quiz.id, option.id)}
-              >
-                {option.text}
-              </div>
-            ))}
+            {quiz.options.map((option) => {
+              const isSelected = selectedOptions[quiz.id]?.includes(option.id);
+              console.log(`Is option ${option.id} selected?`, isSelected);
+              return (
+                <div
+                  key={option.id}
+                  className={`bg-gray-100 p-4 rounded-lg cursor-pointer ${isSelected ? 'bg-blue-200' : ''}`}
+                  onClick={() => handleOptionSelect(quiz.id, option.id)}
+                >
+                  {option.text}
+                </div>
+              );
+            })}
           </div>
         </div>
       ))}
@@ -105,7 +117,6 @@ const QuizPage = () => {
       >
         Submit
       </button>
-
       {submitted && (
         <div className='mt-4'>
           <div className='text-green-500'>Quiz submitted successfully!</div>

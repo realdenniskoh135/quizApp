@@ -68,7 +68,6 @@ export function PasswordReset() {
   );
 }
 
-// A layout component to center the content
 export function Layout({ children }) {
   return (
     <div className="w-full h-full bg-white">
