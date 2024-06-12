@@ -30,3 +30,17 @@ export const getQuizzes = async (args, context) => {
     include: { questions: { include: { options: true } } }
   });
 }
+
+export const getUserAnswers = async (args, context) => {
+  if (!context.user) { throw new HttpError(401) };
+
+  const answers = await context.entities.Answer.findMany({
+    where: { userId: context.user.id },
+    include: {
+      question: true,
+      option: true
+    }
+  });
+
+  return answers;
+};

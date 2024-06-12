@@ -54,9 +54,9 @@ const quizzes = [
 ];
 
 const determineSixthQuestionOptions = (selectedOptions) => {
-  const firstQuestionSelection = selectedOptions[1]?.[0]; // Assuming single selection for the first question
+  const firstQuestionSelection = selectedOptions[1]?.[0]; // Different answer choices based on what user selected for first question
   if (firstQuestionSelection) {
-    if (firstQuestionSelection === 'A' || firstQuestionSelection === 'B') {
+    if (firstQuestionSelection === 'A' || firstQuestionSelection === 'B') { // if user selected choice A or B
       return [
         { id: 'A', text: 'Improving data structures and algorithms understanding' },
         { id: 'B', text: 'Hands-on experience developing web applications' },
@@ -76,7 +76,7 @@ const determineSixthQuestionOptions = (selectedOptions) => {
 };
 
 const determineSeventhQuestionOptions = (selectedOptions) => {
-  const fourthQuestionSelection = selectedOptions[4]?.[0]; // Assuming single selection for the fourth question
+  const fourthQuestionSelection = selectedOptions[4]?.[0]; // Different answer choices based on what the user selected for fourth question
   if (fourthQuestionSelection) {
     if (fourthQuestionSelection === 'A') {
       return [

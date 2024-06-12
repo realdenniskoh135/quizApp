@@ -16,8 +16,8 @@ app QuizApp {
     methods: {
       email: {
         fromField: {
-          name: "My App Postman",
-          email: "hello@itsme.com"
+          name: "Quiz",
+          email: "denniskoh135@gmail.com"
         },
         emailVerification: {
           clientRoute: EmailVerificationRoute,
@@ -71,11 +71,6 @@ entity Option {=psl
     question   Question @relation(fields: [questionId], references: [id])
     questionId Int
 psl=}
-
-action createQuiz {
-  fn: import { createQuiz } from "@src/actions.js",
-  entities: [User, Quiz, Question, Option]
-}
 
 action submitQuiz {
   fn: import { submitQuiz } from "@src/actions.js",
